@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storage Dashboard Replica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo-circle">☰</div>
+          <div class="brand-text"><h1>Storage</h1><p>Sentinel</p></div>
+        </div>
+        <nav>
+          <a class="active" href="#">Dashboard</a>
+          <a href="#">Storage</a>
+          <a href="#">NAS</a>
+          <a href="#">Volumes</a>
+          <a href="#">Target Portal</a>
+          <a href="#">System</a>
+          <a href="#">Reports</a>
+        </nav>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div class="left-group"><div class="menu-dot">☷</div><h2>Dashboard</h2></div>
+          <div class="right-group">
+            <button class="chip">STATUS</button>
+            <button class="chip alert">ALERT</button>
+            <span>Support</span>
+            <span>Logout</span>
+          </div>
+        </header>
+
+        <section class="stats card">
+          <div class="stat-block wide">
+            <h3>System Health</h3>
+            <div class="row"><span>CPU Usage</span><div class="bar"><span style="width: 24%"></span></div><strong>24%</strong></div>
+            <div class="row"><span>Memory Usage</span><div class="bar"><span style="width: 52%"></span></div><strong>52%</strong></div>
+          </div>
+
+          <div class="stat-block">
+            <h3>Memory <span class="inline-big">63%</span></h3>
+            <div class="metric-line">
+              <span class="metric-icon navy">▤</span>
+              <strong>57</strong><small>MB/s</small>
+              <div class="tiny-bar"><span style="width: 57%"></span></div>
+            </div>
+            <div class="metric-line">
+              <span class="metric-icon cyan">▤</span>
+              <strong>32</strong><small>MB/s</small>
+              <div class="tiny-bar"><span style="width: 32%"></span></div>
+            </div>
+          </div>
+
+          <div class="stat-block">
+            <h3>Network In / Out</h3>
+            <div class="metric-line">
+              <span class="metric-icon green">⏚</span>
+              <strong>57</strong><small>MB/s</small>
+              <div class="tiny-bar"><span style="width: 57%"></span></div>
+            </div>
+            <div class="metric-line">
+              <span class="metric-icon sky">◈</span>
+              <strong>32</strong><small>MB/s</small>
+              <div class="tiny-bar"><span style="width: 32%"></span></div>
+            </div>
+          </div>
+
+          <div class="stat-block">
+            <h3>Disk Read / Write</h3>
+            <div class="metric-line">
+              <span class="metric-icon gold">▤</span>
+              <strong>20</strong><small>MB/s</small>
+              <div class="tiny-bar"><span style="width: 20%"></span></div>
+            </div>
+            <div class="metric-line">
+              <span class="metric-icon peach">▤</span>
+              <strong>61</strong><small>MB/s</small>
+              <div class="tiny-bar"><span style="width: 61%"></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="overview-grid">
+          <article class="card overview">
+            <h3>Concentrator Overview</h3>
+            <div class="overview-content">
+              <img src="assets/server-rack.svg" alt="Storage rack" class="server-svg" />
+              <div class="text">
+                <h4>Unit A-01</h4>
+                <p>MGMT IP: 192.168.100.10</p>
+                <p>iSCSI IP: 192.168.100.20</p>
+                <div class="legend">
+                  <span class="legend-item"><img src="assets/fan-icon.svg" alt="Fan" />Fan</span>
+                  <span class="legend-item"><img src="assets/temperature-icon.svg" alt="Temperature" />Temperature</span>
+                  <span class="legend-item"><img src="assets/power-icon.svg" alt="Power" />Power</span>
+                  <span class="legend-item"><img src="assets/powered-icon.svg" alt="Powered" />Powered</span>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card chart">
+            <h3>Network Performance</h3>
+            <img src="assets/network-chart.svg" alt="Network chart" class="chart-svg" />
+            <div class="chart-meta">Sent 57 MB/s | Received 32 MB/s</div>
+          </article>
+          <article class="card disk">
+            <h3>Disk Utilization</h3>
+            <div class="usage-row"><span>25.8 MB/s</span><div class="bar"><span style="width: 74%"></span></div></div>
+            <div class="usage-row"><span>61.7 MB/s</span><div class="bar"><span style="width: 82%" class="mix"></span></div></div>
+          </article>
+        </section>
+
+        <section class="actions-grid">
+          <article class="card controllers">
+            <h3>Discovered Storage Controllers</h3>
+            <ul>
+              <li>192.168.100.20 <span class="dot"></span><button>Open</button></li>
+              <li>192.168.100.21 <span class="dot"></span><button>Open</button></li>
+              <li>192.168.100.22 <span class="dot"></span><button>Open</button></li>
+            </ul>
+          </article>
+          <article class="card quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="action-cards">
+              <div class="action"><span class="action-icon">🗄</span><b>SAN</b><span>Manage SAN</span></div>
+              <div class="action"><span class="action-icon">🗂</span><b>NAS</b><span>Manage NAS</span></div>
+              <div class="action"><span class="action-icon">👁</span><b>Target Portal</b><span>Portal Settings</span></div>
+              <div class="action"><span class="action-icon">⚙</span><b>Resources</b><span>View resources</span></div>
+              <div class="action"><span class="action-icon">📄</span><b>Reports</b><span>Generate reports</span></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="card resources">
+          <div class="table-head">
+            <h3>Resources</h3>
+            <div class="filters"><input placeholder="Search" /><button>Usage</button><button>Capacity</button><button>More</button></div>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Image</th><th>Name</th><th>Path</th><th>Total Space</th><th>Used Space</th><th>Free Space</th><th>Usage</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><img src="assets/mini-rack.svg" class="mini-svg" alt="rack" /></td><td>AVA800-R1921-01</td><td>14.0.2</td><td>7481</td><td>1054</td><td>8147</td><td><div class="bar"><span style="width: 40%" class="mix"></span></div></td></tr>
+              <tr><td><img src="assets/mini-rack.svg" class="mini-svg" alt="rack" /></td><td>AVA800-R1921-02</td><td>14.0.2</td><td>7481</td><td>1234</td><td>8147</td><td><div class="bar"><span style="width: 66%" class="mix"></span></div></td></tr>
+              <tr><td><img src="assets/mini-rack.svg" class="mini-svg" alt="rack" /></td><td>AVA800-R1921-03</td><td>14.0.2</td><td>7481</td><td>1254</td><td>8147</td><td><div class="bar"><span style="width: 80%" class="mix"></span></div></td></tr>
+              <tr><td><img src="assets/mini-rack.svg" class="mini-svg" alt="rack" /></td><td>AVA800-R1921-04</td><td>14.0.2</td><td>7481</td><td>1234</td><td>8147</td><td><div class="bar"><span style="width: 76%" class="mix"></span></div></td></tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
