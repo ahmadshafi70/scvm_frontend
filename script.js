@@ -23,6 +23,13 @@
         <div class="g-label"><div><b>${value}</b><span>${unit}</span></div></div>`;
     });
   }
+  function renderMiniArcs() {
+    document.querySelectorAll('.mini-arc').forEach((el) => {
+      const v = Number(el.dataset.value || 0);
+      el.style.setProperty('--p', Math.max(0, Math.min(100, v)));
+    });
+  }
+
   function drawChart(host) {
     const values = (host.dataset.values || '').split(',').map(Number).filter((n) => !Number.isNaN(n));
     if (values.length < 2) return;
@@ -94,6 +101,7 @@
   const chartHosts = [...document.querySelectorAll('.chart-host')];
   chartHosts.forEach(drawChart);
   renderGauges();
+  renderMiniArcs();
 
   setInterval(() => {
     document.querySelectorAll('.small-chart').forEach((host) => {
@@ -118,18 +126,18 @@
 
 
 
-  const healthCard = document.querySelector('.metrics');
-  const barsView = healthCard?.querySelector('.view-bars');
-  const gaugeView = healthCard?.querySelector('.view-gauge');
+  const barsPanel = document.querySelector('.health-view.view-bars');
+  const gaugePanel = document.querySelector('.health-view.view-gauge');
   document.querySelectorAll('.health-toggle .toggle-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.health-toggle .toggle-btn').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
       const gauge = btn.dataset.view === 'gauge';
-      if (barsView && gaugeView) {
-        barsView.hidden = gauge;
-        gaugeView.hidden = !gauge;
+      if (barsPanel && gaugePanel) {
+        barsPanel.hidden = gauge;
+        gaugePanel.hidden = !gauge;
       }
+      document.querySelectorAll('.health-toggle .toggle-btn').forEach((b) => {
+        b.classList.toggle('active', b.dataset.view === (gauge ? 'gauge' : 'bars'));
+      });
     });
   });
 
