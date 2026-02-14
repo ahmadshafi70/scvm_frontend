@@ -47,8 +47,19 @@
               <div class="usage-row"><span>Memory Usage</span><div class="bar" data-value="52"></div><b>52%</b></div>
             </div>
             <div class="uptime">Uptime 45d 12h 34m</div>
+            <div class="health-toggle">
+              <button class="toggle-btn active" data-view="bars" title="Bars view"><i class="fa-solid fa-list"></i></button>
+              <button class="toggle-btn" data-view="gauge" title="Gauge view"><i class="fa-solid fa-gauge"></i></button>
+            </div>
           </div>
-          <div class="kpis"><div><h4>Memory <b>63%</b></h4><div class="bar kpi-meter" data-value="63"></div><small><span class="ico mem"></span>57 MB/s | <span class="ico mem2"></span>32 MB/s</small></div><div><h4>Network In / Out</h4><small><span class="ico net"></span>57 MB/s | <span class="ico net2"></span>32 MB/s</small></div><div><h4>Disk Read / Write</h4><small><span class="ico disk"></span>20 MB/s | <span class="ico disk2"></span>61 MB/s</small></div></div>
+          <div class="health-right">
+            <div class="kpis view-bars"><div><h4>Memory <b>63%</b></h4><div class="bar kpi-meter" data-value="63"></div><small><span class="ico mem"></span>57 MB/s | <span class="ico mem2"></span>32 MB/s</small></div><div><h4>Network In / Out</h4><small><span class="ico net"></span>57 MB/s | <span class="ico net2"></span>32 MB/s</small></div><div><h4>Disk Read / Write</h4><small><span class="ico disk"></span>20 MB/s | <span class="ico disk2"></span>61 MB/s</small></div></div>
+            <div class="kpis-gauge view-gauge" hidden>
+              <div><p>Memory<br><small>Read / Write</small></p><div class="ring" style="--p:26.5"><b>26.5</b><span>MB/s</span></div><div class="ring" style="--p:61.5"><b>61.5</b><span>MB/s</span></div></div>
+              <div><p>Network<br><small>In / Out</small></p><div class="ring" style="--p:26.5"><b>26.5</b><span>MB/s</span></div><div class="ring" style="--p:61.5"><b>61.5</b><span>MB/s</span></div></div>
+              <div><p>Disk<br><small>Read / Write</small></p><div class="ring" style="--p:26.5"><b>26.5</b><span>MB/s</span></div><div class="ring" style="--p:61.5"><b>61.5</b><span>MB/s</span></div></div>
+            </div>
+          </div>
         </section>
 
         <section class="grid4">

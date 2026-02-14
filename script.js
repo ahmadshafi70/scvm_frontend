@@ -97,5 +97,22 @@
     render();
   }
 
+
+
+  const healthCard = document.querySelector('.metrics');
+  const barsView = healthCard?.querySelector('.view-bars');
+  const gaugeView = healthCard?.querySelector('.view-gauge');
+  document.querySelectorAll('.health-toggle .toggle-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.health-toggle .toggle-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const gauge = btn.dataset.view === 'gauge';
+      if (barsView && gaugeView) {
+        barsView.hidden = gauge;
+        gaugeView.hidden = !gauge;
+      }
+    });
+  });
+
   window.addEventListener('resize', () => chartHosts.forEach(drawChart));
 })();
