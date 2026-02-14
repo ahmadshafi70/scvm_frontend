@@ -5,6 +5,24 @@
   });
 
   const ns = 'http://www.w3.org/2000/svg';
+
+  function renderGauges() {
+    document.querySelectorAll('.svg-gauge').forEach((el) => {
+      const value = Number(el.dataset.value || 0);
+      const max = Number(el.dataset.max || 100);
+      const unit = el.dataset.unit || '';
+      const size = 58;
+      const r = 22;
+      const c = 2 * Math.PI * r;
+      const pct = Math.max(0, Math.min(1, value / max));
+      el.innerHTML = `
+        <svg viewBox="0 0 ${size} ${size}" aria-hidden="true">
+          <circle class="g-track" cx="29" cy="29" r="${r}"></circle>
+          <circle class="g-value" cx="29" cy="29" r="${r}" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - pct)}"></circle>
+        </svg>
+        <div class="g-label"><div><b>${value}</b><span>${unit}</span></div></div>`;
+    });
+  }
   function drawChart(host) {
     const values = (host.dataset.values || '').split(',').map(Number).filter((n) => !Number.isNaN(n));
     if (values.length < 2) return;
@@ -75,6 +93,7 @@
 
   const chartHosts = [...document.querySelectorAll('.chart-host')];
   chartHosts.forEach(drawChart);
+  renderGauges();
 
   setInterval(() => {
     document.querySelectorAll('.small-chart').forEach((host) => {
