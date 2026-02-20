@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sidebar Dropdown Nav</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="sidebar-dropdown.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <nav class="menu">
+      <p>Dashboard</p>
+      <a class="active" href="#">
+        <i class="fa fa-tachometer"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-heartbeat"></i>
+        <span>System Health</span>
+      </a>
+
+      <p>Storage Services</p>
+      <div class="menu-group is-open">
+        <button class="menu-trigger" type="button" aria-expanded="true">
+          <span class="menu-label">
+            <i class="fa fa-database"></i>
+            <span>Block Storage</span>
+          </span>
+          <i class="fa fa-angle-down caret" aria-hidden="true"></i>
+        </button>
+        <div class="menu-children">
+          <a href="#"><i class="fa fa-plus-square-o"></i><span>Auto Create</span></a>
+          <a href="#"><i class="fa fa-plus-square-o"></i><span>Manual Create</span></a>
+          <a href="#"><i class="fa fa-arrow-down"></i><span>Pass Thru</span></a>
+          <a href="#"><i class="fa fa-plus-square-o"></i><span>Thin Volume Create</span></a>
+          <a href="#"><i class="fa fa-plus-square-o"></i><span>NAS Segment Create</span></a>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <button class="menu-trigger" type="button" aria-expanded="false">
+          <span class="menu-label">
+            <i class="fa fa-folder-open-o"></i>
+            <span>File Storage</span>
+          </span>
+          <i class="fa fa-angle-right caret" aria-hidden="true"></i>
+        </button>
+        <div class="menu-children">
+          <a href="#"><i class="fa fa-files-o"></i><span>Synchronous</span></a>
+          <a href="#"><i class="fa fa-clone"></i><span>Asynchronous</span></a>
+          <a href="#"><i class="fa fa-camera"></i><span>Manage Snapshot</span></a>
+        </div>
+      </div>
+
+      <a href="#">
+        <i class="fa fa-cubes"></i>
+        <span>Object Storage</span>
+      </a>
+
+      <p>Resources</p>
+      <a href="#">
+        <i class="fa fa-server"></i>
+        <span>Storage Pools</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-hdd-o"></i>
+        <span>Volumes / LUNs</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-dot-circle-o"></i>
+        <span>Disks &amp; SSDs</span>
+      </a>
+
+      <p>Performance</p>
+      <a href="#"><i class="fa fa-line-chart"></i><span>Metrics</span></a>
+      <a href="#"><i class="fa fa-area-chart"></i><span>IOPS</span></a>
+      <a href="#"><i class="fa fa-bar-chart"></i><span>Throughput</span></a>
+
+      <p>Security</p>
+      <a href="#"><i class="fa fa-lock"></i><span>Access Control</span></a>
+      <a href="#"><i class="fa fa-shield"></i><span>Encryption</span></a>
+      <a href="#"><i class="fa fa-file-text-o"></i><span>Audit Logs</span></a>
+
+      <p>System</p>
+      <a href="#"><i class="fa fa-sitemap"></i><span>Cluster Status</span></a>
+      <a href="#"><i class="fa fa-cube"></i><span>Nodes</span></a>
+      <a href="#"><i class="fa fa-list-alt"></i><span>Logs</span></a>
+      <a href="#"><i class="fa fa-cog"></i><span>Settings</span></a>
+      <a href="#"><i class="fa fa-life-ring"></i><span>Support</span></a>
+    </nav>
+  </aside>
+
+  <script>
+    document.querySelectorAll('.menu-trigger').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.menu-group');
+        const open = group.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(open));
+        const caret = btn.querySelector('.caret');
+        caret.classList.toggle('fa-angle-down', open);
+        caret.classList.toggle('fa-angle-right', !open);
+      });
+    });
+  </script>
+</body>
+</html>
