@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storage Sentinel Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-logo">◢</div>
+          <div>
+            <strong>Storage</strong>
+            <p>Sentinel</p>
+          </div>
+        </div>
+
+        <nav class="menu">
+          <a class="item active" href="#">Dashboard</a>
+          <a class="item" href="#">Storage</a>
+          <div class="group">
+            <span>SB4.00</span>
+            <a href="#">NAS</a>
+            <a href="#">Volumes</a>
+          </div>
+          <a class="item" href="#">Target Portal</a>
+          <a class="item" href="#">System</a>
+          <a class="item" href="#">Ragortis</a>
+          <a class="item" href="#">Reports</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="topbar panel navy">
+          <div class="left"><span class="grid-icon">▦</span>Dashboard</div>
+          <div class="right">
+            <span class="pill">STATUS</span>
+            <span class="pill alert">ALERT</span>
+            <span>Support</span>
+            <span>Logout</span>
+          </div>
+        </header>
+
+        <section class="panel summary">
+          <div class="health">
+            <h3>System Health</h3>
+            <div class="legend">• iSCSI SAN IP &nbsp;&nbsp;|&nbsp;&nbsp; • iECSI LAN</div>
+          </div>
+          <div class="metric-bars">
+            <div class="row">
+              <span>CPU Usage</span>
+              <div class="bar"><i style="width: 24%"></i></div>
+              <b>24%</b>
+            </div>
+            <div class="row">
+              <span>Memory Usage</span>
+              <div class="bar"><i style="width: 44%"></i></div>
+            </div>
+          </div>
+          <div class="stats-col">
+            <h4>Memory <b>63%</b></h4>
+            <p><b>57</b> MB/s</p>
+            <p><b>32</b> MB/s</p>
+          </div>
+          <div class="stats-col">
+            <h4>Network In / Out</h4>
+            <p><b>57</b> MB/s</p>
+            <p><b>32</b> MB/s</p>
+          </div>
+          <div class="stats-col">
+            <h4>Disk Read / Write</h4>
+            <p><b>20</b> MB/s</p>
+            <p><b>61</b> MB/s</p>
+          </div>
+        </section>
+
+        <section class="triple">
+          <article class="panel">
+            <div class="panel-title">Concentrator Overview <span>•••</span></div>
+            <div class="overview">
+              <img src="assets/server.svg" alt="Server" />
+              <div>
+                <h4>Unit A-01</h4>
+                <p>MGMT IP: <b>192.168.100.10</b></p>
+                <p>iSCSI IP: <b>192.168.100.20</b></p>
+                <div class="tags">
+                  <span>● Tan</span><span>● Temperature</span><span>● Power</span><span>● Powered</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-title">Network Performance</div>
+            <img class="chart" src="assets/line-chart.svg" alt="Line chart" />
+            <div class="mini-grid">
+              <div><small>Sent</small><b>57 MB/s</b></div>
+              <div><small>Total</small><b>142 cas</b></div>
+              <div><small>Recenvet</small><b>32 MB/s</b></div>
+              <div><small>Received</small><b>573 cas</b></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-title">Disk Utilization</div>
+            <div class="usage-block">
+              <p><b>25.8 MB/s</b> <span>2.3 (2%)</span></p>
+              <div class="bar"><i style="width:72%"></i></div>
+            </div>
+            <div class="usage-block">
+              <p><b>61.7 MB/s</b> <span>37 (24%)</span></p>
+              <div class="bar warm"><i style="width:83%"></i></div>
+            </div>
+            <div class="mini-grid">
+              <div><small>Etei8</small><b>561 cas</b></div>
+              <div><small>578</small><b>272</b></div>
+              <div><small>Recenvet</small><b>534 cas</b></div>
+              <div><small>650</small><b>912</b></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="double">
+          <article class="panel">
+            <div class="panel-title">Discovered Storage Controllers <span>•••</span></div>
+            <ul class="hosts">
+              <li><span>192.168.100.20</span><button>Open</button></li>
+              <li><span>192.168.100.21</span><button>Open</button></li>
+              <li><span>192.168.100.22</span><button>Open</button></li>
+            </ul>
+          </article>
+
+          <article class="panel">
+            <div class="panel-title">Quick Actions</div>
+            <div class="quick-actions">
+              <button><img src="assets/icon-san.svg" alt="SAN" /><b>SAN</b><span>Manage SAN</span></button>
+              <button><img src="assets/icon-nas.svg" alt="NAS" /><b>NAS</b><span>Manage NAS</span></button>
+              <button><img src="assets/icon-target.svg" alt="Target Portal" /><b>Target Portal</b><span>Portal Settings</span></button>
+              <button><img src="assets/icon-resources.svg" alt="Resources" /><b>Resources</b><span>View resources</span></button>
+              <button><img src="assets/icon-reports.svg" alt="Reports" /><b>Reports</b><span>Generate reports</span></button>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel resources">
+          <div class="panel-title">
+            Resources
+            <div class="filters">
+              <input type="search" placeholder="Search" />
+              <button>Usage</button>
+              <button>Capacity</button>
+              <button>Moe</button>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Image</th><th>Name</th><th>Path</th><th>Total Space</th><th>Used Space</th><th>Free Space</th><th>Usage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="assets/storage-unit.svg" alt="Storage unit" /></td><td>AVA800-R1921-01</td><td>14.0.2</td><td>7481</td><td>1054</td><td>8147</td>
+                <td><div class="percent"><span>6%</span><div class="bar warm"><i style="width: 6%"></i></div></div></td>
+              </tr>
+              <tr>
+                <td><img src="assets/storage-unit.svg" alt="Storage unit" /></td><td>AVA800-R1921-02</td><td>14.0.2</td><td>7481</td><td>1254</td><td>8147</td>
+                <td><div class="percent"><span>92%</span><div class="bar warm"><i style="width: 92%"></i></div></div></td>
+              </tr>
+              <tr>
+                <td><img src="assets/storage-unit.svg" alt="Storage unit" /></td><td>AVA800-R1921-03</td><td>14.0.2</td><td>7481</td><td>1254</td><td>8147</td>
+                <td><div class="percent"><span>80%</span><div class="bar warm"><i style="width: 80%"></i></div></div></td>
+              </tr>
+              <tr>
+                <td><img src="assets/storage-unit.svg" alt="Storage unit" /></td><td>AVA800-R1921-04</td><td>14.0.2</td><td>7481</td><td>1234</td><td>8147</td>
+                <td><div class="percent"><span>76%</span><div class="bar warm"><i style="width: 76%"></i></div></div></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="table-footer">
+            <span>Showing 1 - 10 of 57 entries</span>
+            <div class="pages"><button>Previous</button><button class="active">1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>Next</button></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
