@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sidebar Dropdown Nav</title>
+  <link rel="stylesheet" href="sidebar-dropdown.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <img class="stonefly-logo" src="images/dashboard.png" alt="StoneFly" />
+      <div class="brand-text">
+        <h1>STONEFLY</h1>
+        <small>Storage &amp; Backup</small>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <p>Dashboard</p>
+      <a class="active" href="#">
+        <img class="sidebar-icon" src="images/dashboard.png" alt="" />
+        Dashboard
+      </a>
+      <a href="#">
+        <img class="sidebar-icon" src="images/systemHealth.png" alt="" />
+        System Health
+      </a>
+
+      <p>Storage Services</p>
+      <div class="menu-group is-open">
+        <button class="menu-trigger" type="button" aria-expanded="true">
+          <span class="menu-label">
+            <img class="sidebar-icon" src="images/block storage.png" alt="" />
+            Block Storage
+          </span>
+          <span class="caret">▾</span>
+        </button>
+        <div class="menu-children">
+          <a href="#">Auto Create</a>
+          <a href="#">Manual Create</a>
+          <a href="#">Pass Thru</a>
+          <a href="#">Thin Volume Create</a>
+          <a href="#">NAS Segment Create</a>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <button class="menu-trigger" type="button" aria-expanded="false">
+          <span class="menu-label">
+            <img class="sidebar-icon" src="images/File Storage.png" alt="" />
+            File Storage
+          </span>
+          <span class="caret">▸</span>
+        </button>
+        <div class="menu-children">
+          <a href="#">SMB Shares</a>
+          <a href="#">NFS Exports</a>
+          <a href="#">Permissions</a>
+        </div>
+      </div>
+
+      <a href="#">
+        <img class="sidebar-icon" src="images/objectStorage.png" alt="" />
+        Object Storage
+      </a>
+
+      <p>Resources</p>
+      <a href="#">
+        <img class="sidebar-icon" src="images/StoragePools.png" alt="" />
+        Storage Pools
+      </a>
+      <a href="#">
+        <img class="sidebar-icon" src="images/LUNS.png" alt="" />
+        Volumes / LUNs
+      </a>
+
+      <div class="menu-group">
+        <button class="menu-trigger" type="button" aria-expanded="false">
+          <span class="menu-label">
+            <img class="sidebar-icon" src="images/DiskandSSD.png" alt="" />
+            Disks &amp; SSDs
+          </span>
+          <span class="caret">▸</span>
+        </button>
+        <div class="menu-children">
+          <a href="#">Synchronous</a>
+          <a href="#">Asynchronous</a>
+          <a href="#">Manage Snapshot</a>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <script>
+    document.querySelectorAll('.menu-trigger').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.menu-group');
+        const open = group.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(open));
+        btn.querySelector('.caret').textContent = open ? '▾' : '▸';
+      });
+    });
+  </script>
+</body>
+</html>
