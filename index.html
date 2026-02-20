@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stonefusion Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-text">
+            <h1>Stonefusion</h1>
+            <small>SC-192-10.18.10.250</small>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="menu-icon">☰</div>
+          <div class="meta"><b>Serial Number</b>D5954956</div>
+          <div class="meta"><b>MGMT IP</b>SC-192-10.18.10.250</div>
+          <div class="meta"><b>iSCSI IP</b>SC-192-10.18.10.250</div>
+          <div class="search-wrap"><input placeholder="Search volumes, hosts, targets..." /></div>
+          <button class="alert-btn">ALERT</button>
+          <div class="ticons">⋯</div>
+        </header>
+
+        <div class="content">
+          <section class="card health-view active-view">
+            <div class="health-left">
+              <div>
+                <h2>System Health</h2>
+                <div class="usage-stack">
+                  <div class="usage-row">
+                    <span>CPU Usage</span>
+                    <div class="bar"><div class="bar-fill" style="width:24%"></div></div>
+                    <b>24%</b>
+                  </div>
+                  <div class="usage-row">
+                    <span>Memory Usage</span>
+                    <div class="bar"><div class="bar-fill" style="width:52%"></div></div>
+                    <b>52%</b>
+                  </div>
+                </div>
+              </div>
+              <div class="kpis">
+                <div><h4>Memory</h4><div class="kpi-progress"><div class="bar-fill" style="width:63%"></div></div><small>57 MB/s | 32 MB/s</small></div>
+                <div><h4>Network In / Out</h4><div class="kpi-progress"><div class="bar-fill net" style="width:57%"></div></div><small>57 MB/s | 32 MB/s</small></div>
+                <div><h4>Disk Read / Write</h4><div class="kpi-progress"><div class="bar-fill disk" style="width:61%"></div></div><small>20 MB/s | 61 MB/s</small></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="grid4">
+            <article class="card perf"><h3>Network Performance - Management</h3><div class="chart-host small-chart"></div></article>
+            <article class="card perf"><h3>Network Performance - Data</h3><div class="chart-host small-chart"></div></article>
+            <article class="card perf"><h3>Network Performance - Bonded Data</h3><div class="chart-host small-chart"></div></article>
+            <article class="card perf"><h3>Network Performance - mpath</h3><div class="chart-host small-chart"></div></article>
+          </section>
+
+          <section class="split-mid top-bottom">
+            <article class="card discovery">
+              <h3>Discovered Storage Concentrator</h3>
+              <div class="disc-row"><span>192.168.100.20</span><button>Open</button></div>
+              <div class="disc-row"><span>192.168.100.21</span><button>Open</button></div>
+              <div class="disc-row"><span>192.168.100.22</span><button>Open</button></div>
+            </article>
+            <article class="card quick-links">
+              <div class="table-head">
+                <h3>Quick Actions</h3>
+                <span class="muted">Horizontal scroll</span>
+              </div>
+              <div class="quick-track" id="quickTrack">
+                <div class="q"><b>SAN</b><small>Manage SAN</small></div>
+                <div class="q active"><b>NAS</b><small>Manage NAS</small></div>
+                <div class="q"><b>Target Portal</b><small>Portal Settings</small></div>
+                <div class="q"><b>Resources</b><small>View resources</small></div>
+                <div class="q"><b>Reports</b><small>Generate reports</small></div>
+                <div class="q"><b>Live Stats</b><small>Real Time Statistics</small></div>
+              </div>
+            </article>
+          </section>
+
+          <section class="split2 bottom-panels">
+            <article class="card data-table">
+            <div class="table-head">
+              <h3>Resources</h3>
+              <div class="table-search"><input placeholder="Search" /></div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Image</th><th>Name</th><th>Path</th><th>Usage</th></tr></thead>
+                <tbody>
+                  <tr><td>🖴</td><td>AVAGO-MR9361-8i</td><td>14:2:0</td><td>18% used<div class="mini-progress"><div class="bar-fill" style="width:18%"></div></div></td></tr>
+                  <tr><td>🖴</td><td>AVAGO-MR9361-8i</td><td>14:2:0</td><td>18% used<div class="mini-progress"><div class="bar-fill" style="width:18%"></div></div></td></tr>
+                  <tr><td>🖴</td><td>AVAGO-MR9361-8i</td><td>14:2:0</td><td>18% used<div class="mini-progress"><div class="bar-fill" style="width:18%"></div></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+            </article>
+
+            <article class="card alerts">
+              <div class="table-head">
+                <h3>Alerts, Activity and Warnings</h3>
+                <div class="tabs">
+                  <span class="tab active">All</span>
+                  <span class="tab">Activity</span>
+                  <span class="tab">Alerts</span>
+                  <span class="tab">Warnings</span>
+                </div>
+              </div>
+
+              <div class="alert-item crit"><div><h4>Pool capacity critical</h4><p>Storage Pool "prod-san-01" at 95% capacity</p></div><small>2 minutes ago</small></div>
+              <div class="alert-item warn"><div><h4>High latency detected</h4><p>Volume "vol-db-primary" latency spikes</p></div><small>15 minutes ago</small></div>
+              <div class="alert-item warn"><div><h4>Snapshot retention warning</h4><p>12 snapshots older than 30 days consuming 2.4 TB</p></div><small>1 hour ago</small></div>
+              <div class="alert-item good"><div><h4>Volume created</h4><p>vol-app-server-03 (500 GB) created successfully</p></div><small>5 minutes ago</small></div>
+            </article>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
