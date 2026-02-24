@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stonefusion - SAN Volume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+      :root {
+        --navy: #13355a;
+        --navy-dark: #0f2f53;
+        --bg: #f4f5f7;
+        --card: #ffffff;
+        --border: #e8ebf0;
+        --muted: #98a2b3;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: #344054;
+      }
+
+      .app { display: flex; min-height: 100vh; }
+
+      .sidebar {
+        width: 260px;
+        background: #fff;
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .brand-logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #eef4ff;
+      }
+      .brand h1 { margin: 0; color: #19417a; font-size: 31px; font-weight: 600; }
+      .brand small { color: #98a2b3; }
+
+      .s-menu { padding: 12px; overflow: auto; }
+      .s-menu p {
+        margin: 18px 8px 8px;
+        font-size: 12px;
+        color: #9ca3af;
+        text-transform: uppercase;
+      }
+      .s-menu a {
+        display: block;
+        padding: 9px 12px;
+        margin-bottom: 3px;
+        border-radius: 7px;
+        font-size: 14px;
+        color: #4b5563;
+        text-decoration: none;
+      }
+      .s-menu a.active,
+      .s-menu a:hover { background: #ebf2ff; color: #1d4f91; }
+
+      .workspace { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+      .topbar {
+        height: 62px;
+        background: var(--navy);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        padding: 0 18px;
+        gap: 20px;
+      }
+      .meta b { display: block; font-size: 10px; color: #bfccdd; }
+      .meta { font-size: 11px; }
+      .search {
+        margin-left: auto;
+        width: min(420px, 42vw);
+        height: 38px;
+        border-radius: 20px;
+        border: none;
+        padding: 0 16px;
+      }
+      .alert-btn {
+        border: 0;
+        background: #f4873b;
+        color: #fff;
+        border-radius: 14px;
+        padding: 6px 16px;
+        font-size: 12px;
+      }
+
+      .content { padding: 20px 24px 16px; }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 16px;
+      }
+
+      .tabs {
+        display: grid;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .tab {
+        border: 1px solid var(--border);
+        background: #fff;
+        color: #4b5563;
+        border-radius: 6px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .tab.active { background: var(--navy); color: white; font-weight: 600; }
+
+      .submenu-wrap {
+        position: relative;
+        width: 170px;
+        margin-top: 10px;
+      }
+      .submenu-trigger {
+        width: 100%;
+        height: 40px;
+        border: 0;
+        border-radius: 6px;
+        background: var(--navy);
+        color: #fff;
+        text-align: left;
+        padding: 0 14px;
+        cursor: pointer;
+      }
+      .submenu-list {
+        position: absolute;
+        top: 46px;
+        left: 0;
+        width: 170px;
+        background: #fff;
+        border: 1px solid var(--border);
+        box-shadow: 0 8px 22px rgba(16, 24, 40, 0.12);
+        border-radius: 10px;
+        padding: 8px;
+        list-style: none;
+        margin: 0;
+        display: none;
+      }
+      .submenu-list.show { display: block; }
+      .submenu-list li {
+        padding: 9px 10px;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .submenu-list li:hover { background: #f3f5f9; }
+
+      .table-head {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 12px;
+      }
+      .table-search {
+        width: 320px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        height: 36px;
+        padding: 0 12px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+        font-size: 13px;
+      }
+      th, td {
+        text-align: left;
+        padding: 14px 10px;
+        border-bottom: 1px dashed #e5e7eb;
+      }
+      th { color: #667085; font-weight: 600; }
+      td:last-child, th:last-child { text-align: center; }
+      .check-red { accent-color: #ea384c; }
+
+      .table-footer {
+        margin-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #667085;
+      }
+      .pager span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #edf1f5;
+        margin: 0 4px;
+      }
+      .pager span.active { background: #1f3f66; color: #fff; }
+
+      .right-fixed {
+        position: fixed;
+        right: 10px;
+        top: 26%;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+      .right-fixed button {
+        width: 42px;
+        height: 42px;
+        border: 0;
+        border-radius: 4px;
+        background: var(--navy);
+        color: #fff;
+      }
+
+      .footer {
+        margin-top: auto;
+        text-align: center;
+        font-size: 11px;
+        color: #667085;
+        border-top: 1px solid var(--border);
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-logo"></div>
+          <div>
+            <h1>Stonefusion</h1>
+            <small>SC-192-10.18.10.250</small>
+          </div>
+        </div>
+        <div class="s-menu">
+          <p>Dashboard</p>
+          <a href="#" class="active"><i class="fa fa-th-large"></i> Dashboard</a>
+          <p>SAN</p>
+          <a href="#"><i class="fa fa-database"></i> Volumes</a>
+          <a href="#"><i class="fa fa-server"></i> Sessions</a>
+          <a href="#"><i class="fa fa-exchange"></i> Target Portal</a>
+          <a href="#"><i class="fa fa-random"></i> Fibre Channel</a>
+          <p>Resources</p>
+          <a href="#"><i class="fa fa-list"></i> Summary</a>
+          <a href="#"><i class="fa fa-plus-square"></i> Create Object Storage</a>
+          <p>Reports</p>
+          <a href="#"><i class="fa fa-life-ring"></i> Support</a>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <i class="fa fa-bars"></i>
+          <div class="meta"><b>Serial Number</b>D5954956</div>
+          <div class="meta"><b>MGMT IP</b>SC-192-168-10-250</div>
+          <div class="meta"><b>iSCSI IP</b>SC-192-168-10-250</div>
+          <input class="search" placeholder="Search" />
+          <button class="alert-btn">ALERT</button>
+          <i class="fa fa-bell-o"></i>
+          <i class="fa fa-user-o"></i>
+        </header>
+
+        <main class="content">
+          <section class="card">
+            <div class="tabs">
+              <button class="tab active">SAN Volume</button>
+              <button class="tab">Summary</button>
+              <button class="tab">Replication Summary</button>
+              <button class="tab">+ Create New Volume</button>
+              <button class="tab">Create Duplicated Volume</button>
+              <button class="tab">Configure Volume</button>
+              <button class="tab">Volume Detail</button>
+              <button class="tab">Volume Security</button>
+            </div>
+
+            <div class="submenu-wrap">
+              <button class="submenu-trigger" id="submenuTrigger">Host <i class="fa fa-angle-down" style="float:right"></i></button>
+              <ul class="submenu-list show" id="submenuList">
+                <li>Sessions</li>
+                <li>Target Portal</li>
+                <li>Fibre Channel</li>
+              </ul>
+            </div>
+
+            <div class="table-head">
+              <input class="table-search" placeholder="Search" />
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th><th>Type</th><th>Notes</th><th>Operational State</th><th>Size</th><th>Snapshot Reserved</th><th>Active Session</th><th>Delete All</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>async-rep-local</td><td>Mirror</td><td>iSCSI Async Rep Local.</td><td>OK</td><td>30</td><td>17(1)</td><td>17(1)</td><td><input class="check-red" type="checkbox" checked></td></tr>
+                <tr><td>async-rep-local</td><td>Mirror</td><td>iSCSI Async Rep Local.</td><td>OK</td><td>30</td><td>17(1)</td><td>17(1)</td><td><input class="check-red" type="checkbox" checked></td></tr>
+                <tr><td>async-rep-local</td><td>Mirror</td><td>iSCSI Async Rep Local.</td><td>OK</td><td>30</td><td>17(1)</td><td>17(1)</td><td><input class="check-red" type="checkbox"></td></tr>
+                <tr><td>async-rep-local</td><td>Mirror</td><td>iSCSI Async Rep Local.</td><td>OK</td><td>50</td><td>17(1)</td><td>17(1)</td><td><input class="check-red" type="checkbox"></td></tr>
+                <tr><td>async-rep-local</td><td>Mirror</td><td>iSCSI Async Rep Local.</td><td>OK</td><td>30</td><td>17(1)</td><td>17(1)</td><td><input class="check-red" type="checkbox" checked></td></tr>
+                <tr><td>async-rep-local</td><td>Mirror</td><td>iSCSI Async Rep Local.</td><td>OK</td><td>50</td><td>17(1)</td><td>17(1)</td><td><input class="check-red" type="checkbox" checked></td></tr>
+              </tbody>
+            </table>
+
+            <div class="table-footer">
+              <div>Show <b>10</b> entries &nbsp;&nbsp; Showing 1 to 10 of 57 entries</div>
+              <div class="pager">Previous <span class="active">1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span> Next</div>
+            </div>
+          </section>
+        </main>
+
+        <div class="footer">© 2026 StoneFly Inc. | All Rights Reserved</div>
+      </div>
+    </div>
+
+    <div class="right-fixed">
+      <button><i class="fa fa-cog"></i></button>
+      <button><i class="fa fa-file-video-o"></i></button>
+      <button><i class="fa fa-question-circle-o"></i></button>
+    </div>
+
+    <script>
+      const trigger = document.getElementById('submenuTrigger');
+      const list = document.getElementById('submenuList');
+      trigger.addEventListener('click', () => list.classList.toggle('show'));
+    </script>
+  </body>
+</html>
