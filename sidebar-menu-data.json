@@ -1,0 +1,210 @@
+{
+  "menu": [
+    {
+      "label": "SAN",
+      "icon": "fa fa-database",
+      "children": [
+        {
+          "label": "Volumes",
+          "icon": "fa fa-hdd-o",
+          "children": [
+            {
+              "label": "Summary",
+              "icon": "fa fa-list fa-sub",
+              "href": "/StoneFly/bin/lv_summary.pl?object_id="
+            },
+            {
+              "label": "Replication Summary",
+              "icon": "fa fa-hdd-o fa-sub",
+              "href": "/StoneFly/bin/replication_summary.pl?object_id="
+            },
+            {
+              "label": "Create New Volume",
+              "icon": "fa fa-plus fa-sub",
+              "children": [
+                {
+                  "label": "Auto Create",
+                  "icon": "fa fa-plus-square-o",
+                  "href": null
+                },
+                {
+                  "label": "Manual Create",
+                  "icon": "fa fa-plus-square-o",
+                  "href": null
+                },
+                {
+                  "label": "Pass Thru",
+                  "icon": "fa fa-arrow-down",
+                  "href": null
+                },
+                {
+                  "label": "Thin Volume Create",
+                  "icon": "fa fa-plus-square-o",
+                  "href": null
+                },
+                {
+                  "label": "NAS Segment Create",
+                  "icon": "fa fa-plus-square-o",
+                  "href": null
+                }
+              ]
+            },
+            {
+              "label": "Create Deduplicated Volume",
+              "icon": null,
+              "href": "/StoneFly/bin/lv_dedup_create.pl?object_id="
+            },
+            {
+              "label": "Configure Volume",
+              "icon": "fa fa-wrench fa-sub",
+              "children": [
+                {
+                  "label": "General Configuration",
+                  "icon": "fa fa-pencil-square fa-sub",
+                  "href": "/StoneFly/bin/lvc_general.pl?object_id="
+                },
+                {
+                  "label": "Expand Volume",
+                  "icon": "fa fa-plus-square-o fa-sub",
+                  "href": "/StoneFly/bin/lvc_expand.pl?object_id="
+                },
+                {
+                  "label": "Add Image",
+                  "icon": "fa fa-picture-o fa-sub",
+                  "children": [
+                    {
+                      "label": "Synchronous",
+                      "icon": "fa fa-clone fa-sub",
+                      "href": "/StoneFly/bin/lvc_mirror_add_slice.pl?mode=add_sync_slice&object_id="
+                    },
+                    {
+                      "label": "Asynchronous",
+                      "icon": "fa fa-files-o fa-sub",
+                      "href": "/StoneFly/bin/lvc_mirror_add_async_slice.pl?mode=add_async_slice&object_id="
+                    }
+                  ]
+                },
+                {
+                  "label": "Manage Image",
+                  "icon": "fa fa-object-group fa-sub",
+                  "children": [
+                    {
+                      "label": "Synchronous",
+                      "icon": "fa fa-plus-square-o",
+                      "href": null
+                    },
+                    {
+                      "label": "Asynchronous",
+                      "icon": "fa fa-plus-square-o",
+                      "href": null
+                    }
+                  ]
+                },
+                {
+                  "label": "Manage Snapshot",
+                  "icon": "fa fa-pencil-square-o fa-sub",
+                  "children": [
+                    {
+                      "label": "General",
+                      "icon": "fa fa-file-archive-o fa-sub",
+                      "href": "/StoneFly/bin/lvc_snap.pl?mode=general&object_id="
+                    },
+                    {
+                      "label": "Schedule",
+                      "icon": "fa fa-calendar-check-o fa-sub",
+                      "href": "/StoneFly/bin/lvc_snap.pl?mode=schedule&object_id="
+                    },
+                    {
+                      "label": "Detail",
+                      "icon": "fa fa-folder-open fa-sub",
+                      "href": "/StoneFly/bin/lvc_snap.pl?mode=detail&object_id="
+                    }
+                  ]
+                },
+                {
+                  "label": "Thin Volumes",
+                  "icon": "fa fa-ellipsis-v fa-sub",
+                  "href": "/StoneFly/bin/lvc_thin.pl?object_id=&"
+                },
+                {
+                  "label": "Deduplicated Volumes",
+                  "icon": null,
+                  "href": "/StoneFly/bin/lvc_dedup.pl?object_id=&"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Host",
+          "icon": "fa fa-user",
+          "href": "javascript:void(0);"
+        },
+        {
+          "label": "Session",
+          "icon": "fa fa-reorder",
+          "href": "/StoneFly/bin/sessions.pl"
+        },
+        {
+          "label": "Target Portal",
+          "icon": "fa fa-arrows fa-sub",
+          "href": "javascript:void(0);"
+        },
+        {
+          "label": "Fiber Channel",
+          "icon": "fa fa-circle fa-sub",
+          "href": "/StoneFly/bin/fibre_chan.pl"
+        }
+      ]
+    },
+    {
+      "label": "Resources",
+      "icon": "fa fa-cog",
+      "children": [
+        { "label": "Storage Pools", "icon": "fa fa-server" },
+        { "label": "Volumes / LUNs", "icon": "fa fa-hdd-o" },
+        { "label": "Disks & SSDs", "icon": "fa fa-dot-circle-o" }
+      ]
+    },
+    {
+      "label": "Performance",
+      "icon": "fa fa-area-chart",
+      "children": [
+        { "label": "Metrics", "icon": "fa fa-line-chart" },
+        { "label": "IOPS", "icon": "fa fa-area-chart" },
+        { "label": "Throughput", "icon": "fa fa-bar-chart" }
+      ]
+    },
+    {
+      "label": "Security",
+      "icon": "fa fa-lock",
+      "children": [
+        { "label": "Access Control", "icon": "fa fa-shield" },
+        { "label": "Encryption", "icon": "fa fa-key" },
+        { "label": "Audit Logs", "icon": "fa fa-file-text-o" }
+      ]
+    },
+    {
+      "label": "System",
+      "icon": "fa fa-desktop",
+      "children": [
+        { "label": "Cluster Status", "icon": "fa fa-desktop" },
+        { "label": "Nodes", "icon": "fa fa-user" },
+        { "label": "Logs", "icon": "fa fa-file" },
+        { "label": "Settings", "icon": "fa fa-cog" },
+        { "label": "Support", "icon": "fa fa-life-ring" }
+      ]
+    },
+    {
+      "label": "Reports",
+      "icon": "fa fa-file-text-o",
+      "children": [
+        { "label": "Log", "icon": "fa fa-file fa-sub", "href": "/StoneFly/bin/fflog.pl" },
+        { "label": "Configuration Report", "icon": "fa fa-file-excel-o fa-sub", "href": "/StoneFly/bin/config_report.pl" },
+        { "label": "Historical Statistics", "icon": "fa fa-line-chart fa-sub", "href": "/StoneFly/bin/statistics_report.pl" },
+        { "label": "Debug Logs", "icon": "fa fa-file-archive-o fa-sub", "href": "/StoneFly/bin/debug.pl" },
+        { "label": "Live Statistics", "icon": "fa fa-area-chart fa-sub", "href": "/StoneFly/bin/live_statistics.pl" }
+      ]
+    }
+  ]
+}
