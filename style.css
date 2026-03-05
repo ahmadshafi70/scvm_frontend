@@ -1,0 +1,214 @@
+:root {
+  --bg: #f3f5f9;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --ok: #10b981;
+  --warn: #f97316;
+  --critical: #ef4444;
+  --accent: #2563eb;
+  --curve-secondary: #60a5fa;
+  --curve-tertiary: #93c5fd;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.header p {
+  margin: 8px 0 24px;
+  color: var(--muted);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  overflow: hidden;
+  transition: transform .24s ease, border-color .24s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: #94a3b8;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.label {
+  color: var(--muted);
+  font-size: .72rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  transition: background-color .55s ease;
+}
+
+.value-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.value {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.unit {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-left: 3px;
+}
+
+.progress-meta {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: .72rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.progress {
+  margin-top: 8px;
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0;
+  height: 100%;
+  transition: width .9s cubic-bezier(.22, .61, .36, 1), background-color .55s ease;
+}
+
+.sparkline {
+  width: 94px;
+  height: 40px;
+}
+
+.sparkline .curve-main {
+  stroke-width: 2.9;
+  transition: stroke .55s ease;
+}
+
+.sparkline .curve-alt {
+  stroke: var(--curve-secondary);
+  stroke-width: 1.9;
+  opacity: .75;
+}
+
+.sparkline .curve-base {
+  stroke: var(--curve-tertiary);
+  stroke-width: 1.1;
+  opacity: .7;
+}
+
+.hover-panel {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(15, 23, 42, 0.97), rgba(30, 41, 59, 0.95));
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .24s ease;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover .hover-panel {
+  opacity: 1;
+}
+
+.live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .65rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.live .pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #ef4444;
+  animation: pulse 1.2s infinite;
+}
+
+.hover-value {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.hover-chart {
+  width: 100%;
+  height: 60px;
+}
+
+.hover-chart .curve-main {
+  stroke: #ffffff;
+  stroke-width: 2.8;
+}
+
+.hover-chart .curve-alt {
+  stroke: #93c5fd;
+  stroke-width: 2;
+  opacity: .85;
+}
+
+.hover-chart .curve-base {
+  stroke: #60a5fa;
+  stroke-width: 1.3;
+  opacity: .75;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: .4; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
