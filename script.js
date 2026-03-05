@@ -65,10 +65,10 @@ function clamp(min, max, v) {
   return Math.max(min, Math.min(max, v));
 }
 
-function createTrend(seed, phaseOffset = 0, amp = 10, noisePower = 5) {
-  return Array.from({ length: 18 }, (_, i) => {
-    const wave = Math.sin((i + seed + phaseOffset) * 0.48) * amp;
-    const wave2 = Math.cos((i + phaseOffset) * 0.33) * (amp * 0.35);
+function createTrend(seed, phaseOffset = 0, amp = 8.5, noisePower = 3.2) {
+  return Array.from({ length: 22 }, (_, i) => {
+    const wave = Math.sin((i + seed + phaseOffset) * 0.62) * amp;
+    const wave2 = Math.cos((i + phaseOffset) * 0.38) * (amp * 0.24);
     const noise = Math.random() * noisePower - (noisePower / 2);
     return clamp(5, 98, Math.round(seed + wave + wave2 + noise));
   });
@@ -85,33 +85,24 @@ function polylinePoints(series, width, height) {
   }).join(' ');
 }
 
-function buildCurves(seed) {
-  const main = createTrend(seed, 0, 10, 4.5);
-  const alt = createTrend(seed - 5, 4, 8, 3.8);
-  const base = createTrend(seed - 10, 7, 6.5, 3.2);
-
+function buildCurve(seed) {
+  const main = createTrend(seed);
   return {
-    sparkMain: polylinePoints(main.slice(-8), 94, 40),
-    sparkAlt: polylinePoints(alt.slice(-8), 94, 40),
-    sparkBase: polylinePoints(base.slice(-8), 94, 40),
-    hoverMain: polylinePoints(main, 260, 60),
-    hoverAlt: polylinePoints(alt, 260, 60),
-    hoverBase: polylinePoints(base, 260, 60)
+    sparkMain: polylinePoints(main.slice(-12), 128, 30),
+    hoverMain: polylinePoints(main, 260, 56)
   };
 }
 
 function cardTemplate(metric, idx) {
   const color = getColor(metric.value);
-  const curves = buildCurves(metric.value);
+  const curves = buildCurve(metric.value);
 
   return `<article class="card" data-index="${idx}">
       <div class="card-top"><span class="label">${metric.label}</span><span class="status-dot" style="background:${color}"></span></div>
       <div class="value-row">
         <div class="value">${metric.value}<span class="unit">${metric.unit}</span></div>
-        <svg class="sparkline" viewBox="0 0 94 40" preserveAspectRatio="none">
-          <polyline class="curve-base" fill="none" points="${curves.sparkBase}" />
-          <polyline class="curve-alt" fill="none" points="${curves.sparkAlt}" />
-          <polyline class="curve-main" fill="none" stroke="${color}" points="${curves.sparkMain}" />
+        <svg class="sparkline" viewBox="0 0 128 30" preserveAspectRatio="none">
+          <polyline class="curve-main" stroke="${color}" points="${curves.sparkMain}" />
         </svg>
       </div>
       <div class="progress-meta"><span>Utilization</span><span class="percent">${metric.value}%</span></div>
@@ -119,10 +110,8 @@ function cardTemplate(metric, idx) {
       <div class="hover-panel">
         <div class="live"><span class="pulse"></span>Live Telemetry</div>
         <div class="hover-value">${metric.value}<span class="unit">${metric.unit}</span></div>
-        <svg class="hover-chart" viewBox="0 0 260 60" preserveAspectRatio="none">
-          <polyline class="curve-base" fill="none" points="${curves.hoverBase}" />
-          <polyline class="curve-alt" fill="none" points="${curves.hoverAlt}" />
-          <polyline class="curve-main" fill="none" points="${curves.hoverMain}" />
+        <svg class="hover-chart" viewBox="0 0 260 56" preserveAspectRatio="none">
+          <polyline class="curve-main" points="${curves.hoverMain}" />
         </svg>
       </div>
     </article>`;
@@ -142,7 +131,7 @@ function tick() {
     const index = Number($(this).data('index'));
     const metric = metrics[index];
     const color = getColor(metric.value);
-    const curves = buildCurves(metric.value);
+    const curves = buildCurve(metric.value);
 
     $(this).find('.value').html(`${metric.value}<span class="unit">${metric.unit}</span>`);
     $(this).find('.hover-value').html(`${metric.value}<span class="unit">${metric.unit}</span>`);
@@ -150,12 +139,7 @@ function tick() {
     $(this).find('.status-dot').css({ background: color });
     $(this).find('.progress-fill').css({ width: `${metric.value}%`, background: color });
 
-    $(this).find('.sparkline .curve-base').attr({ points: curves.sparkBase });
-    $(this).find('.sparkline .curve-alt').attr({ points: curves.sparkAlt });
     $(this).find('.sparkline .curve-main').attr({ points: curves.sparkMain, stroke: color });
-
-    $(this).find('.hover-chart .curve-base').attr({ points: curves.hoverBase });
-    $(this).find('.hover-chart .curve-alt').attr({ points: curves.hoverAlt });
     $(this).find('.hover-chart .curve-main').attr({ points: curves.hoverMain });
   });
 }
