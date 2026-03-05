@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stonefusion Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside id="sidebar" class="sidebar expanded">
+      <div class="brand-row">
+        <div class="brand-icon"></div>
+        <div class="brand-text">
+          <h1>Stonefusion</h1>
+          <p>SC-192-168-10-250</p>
+        </div>
+      </div>
+
+      <nav class="menu-block">
+        <h2>Dashboard</h2>
+        <a class="menu-item active">Dashboard</a>
+
+        <h2>NAS</h2>
+        <a class="menu-item">Volumes</a>
+        <a class="menu-item">CIFS Shares</a>
+        <a class="menu-item">NAS Sessions</a>
+        <a class="menu-item">Antivirus</a>
+
+        <h2>System</h2>
+        <a class="menu-item">Information</a>
+        <a class="menu-item">Admin</a>
+        <a class="menu-item">Diagnostics</a>
+        <a class="menu-item">Notifications</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="toggleSidebar" class="icon-btn">⟷</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="system-meta">
+          <div><span>Serial Number</span><strong id="serialNumber">--</strong></div>
+          <div><span>MGMTIP</span><strong id="mgmtIp">--</strong></div>
+          <div><span>ISCSI IP</span><strong id="iscsiIp">--</strong></div>
+        </div>
+        <div class="topbar-actions">
+          <input class="search" placeholder="Search" />
+          <button class="alert-btn">Alert</button>
+        </div>
+      </header>
+
+      <section class="content-wrap">
+        <div class="section-head">
+          <div>
+            <h2>System Health <span class="live">LIVE</span></h2>
+            <p>Real-time telemetry from SC-192-168-10-250</p>
+          </div>
+          <div class="uptime">Uptime: <strong id="uptime">--</strong></div>
+        </div>
+
+        <div id="statCards" class="stat-grid"></div>
+
+        <section>
+          <h3>Network Performance</h3>
+          <div class="perf-grid">
+            <div class="card small">Management <canvas id="perf1"></canvas></div>
+            <div class="card small">Data <canvas id="perf2"></canvas></div>
+            <div class="card small">Bonded Data <canvas id="perf3"></canvas></div>
+            <div class="card small">mpath <canvas id="perf4"></canvas></div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Storage Overview</h3>
+          <div id="storageCards" class="storage-grid"></div>
+        </section>
+
+        <section class="split-grid">
+          <div class="card">
+            <div class="card-head"><h3>Resources</h3></div>
+            <table>
+              <thead><tr><th>Name</th><th>Path</th><th>Usage</th></tr></thead>
+              <tbody id="resourcesTable"></tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Alerts, Activity and Warnings</h3></div>
+            <div id="alertsList" class="alerts-list"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
