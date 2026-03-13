@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAN Volume Details — Modern Concept</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --primary: #2563eb;
+        --accent: #14b8a6;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --ok: #22c55e;
+        --radius: 18px;
+        --shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 10% 0%, #dbeafe 0, transparent 30%),
+          radial-gradient(circle at 90% 100%, #ccfbf1 0, transparent 35%),
+          var(--bg);
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        min-height: 100vh;
+      }
+
+      aside {
+        background: linear-gradient(180deg, #0f2b5e, #0c1f42);
+        color: #dbeafe;
+        padding: 24px 18px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        margin-bottom: 28px;
+        opacity: 0.9;
+      }
+
+      .nav-item {
+        padding: 12px 14px;
+        margin-bottom: 8px;
+        border-radius: 12px;
+        color: #bfdbfe;
+      }
+
+      .nav-item.active {
+        background: rgba(255, 255, 255, 0.14);
+        color: #fff;
+      }
+
+      main {
+        padding: 26px;
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .title h1 {
+        margin: 0;
+        font-size: 32px;
+      }
+
+      .title p {
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        padding: 10px 16px;
+        background: #fff7ed;
+        color: #9a3412;
+        font-weight: 600;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--warning);
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5);
+        animation: pulse 1.8s infinite;
+      }
+
+      @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); }
+        70% { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 18px;
+      }
+
+      .card {
+        background: var(--panel);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 16px;
+      }
+
+      .stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .kpi {
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 12px;
+      }
+
+      .kpi .label { color: var(--muted); font-size: 12px; }
+      .kpi .value { font-size: 22px; font-weight: 700; margin-top: 6px; }
+
+      .ring {
+        --p: 72;
+        width: 190px;
+        height: 190px;
+        margin: 8px auto;
+        border-radius: 50%;
+        background:
+          conic-gradient(var(--primary) calc(var(--p) * 1%), #e2e8f0 0);
+        position: relative;
+      }
+
+      .ring::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        background: #fff;
+        border-radius: 50%;
+      }
+
+      .ring span {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        font-size: 28px;
+        font-weight: 800;
+        z-index: 2;
+      }
+
+      .sub-grid {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      .progress-item { margin-bottom: 14px; }
+
+      .progress-head {
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+
+      .bar {
+        height: 10px;
+        background: #e2e8f0;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .fill {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #60a5fa, #2563eb);
+      }
+
+      .timeline path {
+        stroke-dasharray: 480;
+        stroke-dashoffset: 480;
+        animation: draw 2.5s ease forwards;
+      }
+
+      @keyframes draw {
+        to { stroke-dashoffset: 0; }
+      }
+
+      .signal {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .pill {
+        flex: 1;
+        text-align: center;
+        padding: 8px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .ok { background: #dcfce7; color: #166534; }
+      .warn { background: #fef3c7; color: #92400e; }
+      .bad { background: #fee2e2; color: #991b1b; }
+
+      @media (max-width: 1100px) {
+        .layout { grid-template-columns: 1fr; }
+        aside { display: none; }
+        .grid, .hero, .sub-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside>
+        <div class="brand">◉ STONERLY STORAGE</div>
+        <div class="nav-item">Dashboard</div>
+        <div class="nav-item active">SAN › Volume Details</div>
+        <div class="nav-item">Replication</div>
+        <div class="nav-item">Target Portal</div>
+        <div class="nav-item">Analytics</div>
+      </aside>
+
+      <main>
+        <div class="top">
+          <div class="title">
+            <h1>Volume Details 2.0</h1>
+            <p>Interactive, at-a-glance observability for async replicated volumes.</p>
+          </div>
+          <div class="chip"><span class="dot"></span> Rebuild Delay Detected</div>
+        </div>
+
+        <div class="grid">
+          <section class="card hero">
+            <div>
+              <h3 style="margin: 0">Asyn-Rep-Volume</h3>
+              <p style="color: var(--muted); margin-top: 6px">
+                Smart health card with inline KPIs and anomaly badges.
+              </p>
+              <div class="stat-row">
+                <div class="kpi"><div class="label">Volume Size</div><div class="value">10 GiB</div></div>
+                <div class="kpi"><div class="label">Block Size</div><div class="value">512</div></div>
+                <div class="kpi"><div class="label">Snapshots</div><div class="value">17</div></div>
+              </div>
+              <div class="sub-grid">
+                <div>
+                  <h4 style="margin: 0 0 10px">Replication Pipeline</h4>
+                  <div class="progress-item">
+                    <div class="progress-head"><span>Primary → DR Sync</span><strong>98%</strong></div>
+                    <div class="bar"><div class="fill" style="width: 98%"></div></div>
+                  </div>
+                  <div class="progress-item">
+                    <div class="progress-head"><span>Snapshot Pack Queue</span><strong>64%</strong></div>
+                    <div class="bar"><div class="fill" style="width: 64%; background: linear-gradient(90deg,#fbbf24,#f59e0b)"></div></div>
+                  </div>
+                  <div class="progress-item">
+                    <div class="progress-head"><span>Deduplication</span><strong>82%</strong></div>
+                    <div class="bar"><div class="fill" style="width: 82%; background: linear-gradient(90deg,#34d399,#10b981)"></div></div>
+                  </div>
+                </div>
+                <div>
+                  <h4 style="margin: 0 0 10px">Signal Status</h4>
+                  <div class="signal">
+                    <div class="pill ok">I/O Stable</div>
+                    <div class="pill warn">Latency ↑</div>
+                    <div class="pill bad">Packet Loss</div>
+                  </div>
+                  <svg class="timeline" viewBox="0 0 420 120" width="100%" height="120" style="margin-top: 18px">
+                    <defs>
+                      <linearGradient id="gradLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#14b8a6"/>
+                        <stop offset="100%" stop-color="#2563eb"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M10,90 C60,20 120,110 170,60 C220,10 280,95 330,50 C360,25 390,30 410,18"
+                          fill="none" stroke="url(#gradLine)" stroke-width="5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 style="margin: 0 0 10px">Storage Capacity</h4>
+              <div class="ring" style="--p:72"><span>72%</span></div>
+              <p style="text-align: center; color: var(--muted); margin: 8px 0 0">
+                7.2 / 10 GiB allocated with predictive headroom tracking.
+              </p>
+            </div>
+          </section>
+
+          <section class="card">
+            <h3 style="margin-top: 0">Design Concepts Applied</h3>
+            <ul style="line-height: 1.8; color: var(--muted); padding-left: 18px">
+              <li>Glass-like cards + depth shadows for modern hierarchy.</li>
+              <li>Conic-gradient radial chart for instant capacity comprehension.</li>
+              <li>Semantic progress bars with contextual color feedback.</li>
+              <li>SVG animated trend line for replication health storytelling.</li>
+              <li>Status pills and pulsing alert chip for actionable attention.</li>
+            </ul>
+            <div style="margin-top: 16px; border-top: 1px solid #e2e8f0; padding-top: 12px; color: var(--muted)">
+              Optional next step: swap static mock data with API-driven metrics and add
+              dark mode + micro-interactions on hover.
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
