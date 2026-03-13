@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAN Volume Detail - Advanced Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <div class="brand__logo">SV</div>
+          <div>
+            <p class="brand__name">STONELFY</p>
+            <p class="brand__role">Administrator</p>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="nav__section is-open" data-target="san">SAN</button>
+          <ul class="nav__list is-open" id="san">
+            <li>Volume</li>
+            <li>Create New Volume</li>
+            <li>Auto Create</li>
+            <li>Manual Create</li>
+            <li>Host Sessions</li>
+          </ul>
+
+          <button class="nav__section" data-target="nas">NAS</button>
+          <ul class="nav__list" id="nas">
+            <li>Segments</li>
+            <li>Antivirus</li>
+            <li>Scaleout</li>
+          </ul>
+
+          <button class="nav__section" data-target="system">System</button>
+          <ul class="nav__list" id="system">
+            <li>Admin</li>
+            <li>Network</li>
+            <li>Diagnostics</li>
+            <li>Notifications</li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="topbar__title-wrap">
+            <button id="sidebarToggle" class="icon-btn" title="Toggle sidebar">☰</button>
+            <h1>SAN Volume Details</h1>
+          </div>
+          <div class="topbar__actions">
+            <span class="pill pill--alert">Alert</span>
+            <button class="btn-outline">Support</button>
+            <button class="icon-btn" title="Logout">⏻</button>
+          </div>
+        </header>
+
+        <section class="tabs">
+          <button class="tab">Summary</button>
+          <button class="tab">Replication Summary</button>
+          <button class="tab">+ Create New Volume</button>
+          <button class="tab">Create Duplicated Volume</button>
+          <button class="tab">Configure Volume</button>
+          <button class="tab is-active">Volume Detail</button>
+          <button class="tab">Volume Security</button>
+        </section>
+
+        <section class="card filters">
+          <h2>Volume Detail</h2>
+          <div class="grid grid--4">
+            <label>
+              Select Volume
+              <select id="volumeSelect">
+                <option>asyn-rep-volume</option>
+                <option>gold-tier-db</option>
+                <option>backup-archive-01</option>
+              </select>
+            </label>
+            <label>
+              Select An Image
+              <select id="imageSelect">
+                <option>asyn-rep-image-1</option>
+                <option>asyn-rep-image-2</option>
+              </select>
+            </label>
+            <label>
+              Select Snapshot
+              <select>
+                <option>snap-q4-recovery</option>
+                <option>snap-before-patch</option>
+              </select>
+            </label>
+            <label>
+              Select Snapspace
+              <select>
+                <option>primary-snapspace</option>
+                <option>offsite-snapspace</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card__header">
+            <h2>General Info <span id="volumeName">Asyn-Rep-Volume</span></h2>
+            <div class="card__actions">
+              <span>Export <strong class="text-blue">Enabled</strong></span>
+              <button class="icon-btn" title="Edit">✎</button>
+              <button class="icon-btn" title="Delete">🗑</button>
+              <button class="icon-btn" title="More">⋮</button>
+            </div>
+          </div>
+
+          <div class="stats-row" id="stats"></div>
+        </section>
+
+        <section class="dual-grid">
+          <article class="card">
+            <h2>Status Of <span id="statusVolumeName">Asyn-Rep-Volume</span></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Storage Concentrator</th>
+                  <th>Volume Block Size</th>
+                  <th>Volume Size (GiB)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SC-50-15-49-115</td>
+                  <td><span class="badge badge--amber">512</span></td>
+                  <td><span class="badge badge--blue">10</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="card">
+            <div class="card__header card__header--stack-sm">
+              <h2>Existing Mapping</h2>
+              <div class="inline-filter">
+                <label for="mappingFilter">Filter:</label>
+                <input id="mappingFilter" type="text" placeholder="Search mapping by name..." />
+              </div>
+            </div>
+
+            <table id="mappingTable">
+              <thead>
+                <tr>
+                  <th data-sort="name">Name ↕</th>
+                  <th data-sort="type">Image Type ↕</th>
+                  <th>Image Stats</th>
+                  <th data-sort="percent">Rebuild Percent ↕</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
