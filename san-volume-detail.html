@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAN Storage Volume Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+            boxShadow: {
+              card: "0 6px 22px rgba(15, 23, 42, 0.08)",
+            },
+            colors: {
+              canvas: "#F5F7FA",
+              primary: "#2563EB",
+            },
+            borderRadius: {
+              card: "12px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .tab-btn { white-space: nowrap; border-radius: 0.5rem; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; color: #475569; transition: all .2s ease; }
+      .tab-btn:hover { background: #f1f5f9; color: #0f172a; }
+      .tab-btn.active { background: #2563EB; color: #fff; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08); }
+      .card { border-radius: 12px; background: white; padding: 24px; box-shadow: 0 6px 22px rgba(15, 23, 42, 0.08); }
+      .field-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #64748b; }
+      .field-value { margin-top: 0.25rem; font-size: 0.875rem; font-weight: 500; color: #1e293b; }
+      .badge { display: inline-flex; align-items: center; border-radius: 9999px; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 600; }
+    </style>
+  </head>
+  <body class="bg-canvas font-sans text-slate-800">
+    <main class="mx-auto max-w-[1600px] px-6 py-8 lg:px-8">
+      <section class="grid grid-cols-12 gap-5">
+        <div class="col-span-12">
+          <nav aria-label="Volume navigation" class="card p-4">
+            <ul id="tabs" class="flex flex-wrap gap-2">
+              <li><button class="tab-btn">SAN Volume</button></li>
+              <li><button class="tab-btn">Summary</button></li>
+              <li><button class="tab-btn">Replication Summary</button></li>
+              <li><button class="tab-btn">Create New Volume</button></li>
+              <li><button class="tab-btn">Create Duplicated Volume</button></li>
+              <li><button class="tab-btn">Configure Volume</button></li>
+              <li><button class="tab-btn active" aria-current="page">Volume Detail</button></li>
+              <li><button class="tab-btn">Volume Security</button></li>
+            </ul>
+          </nav>
+        </div>
+
+        <article class="card col-span-12">
+          <h2 class="mb-5 text-lg font-semibold">Volume Detail Filters</h2>
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <label class="block">
+              <span class="field-label">Select Volume</span>
+              <select class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-100">
+                <option>Asyn-Rep-Volume</option>
+                <option>Backup-Volume-A</option>
+                <option>Archive-Volume-11</option>
+              </select>
+            </label>
+            <label class="block">
+              <span class="field-label">Select Image</span>
+              <select class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-100">
+                <option>Primary-Image-01</option>
+                <option>Mirror-Image-04</option>
+                <option>Snapshot-Image-07</option>
+              </select>
+            </label>
+            <label class="block">
+              <span class="field-label">Select Snapshot</span>
+              <select class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-100">
+                <option>SNAP-2026-001</option>
+                <option>SNAP-2026-002</option>
+                <option>SNAP-2026-003</option>
+              </select>
+            </label>
+            <label class="block">
+              <span class="field-label">Select Snapspace</span>
+              <select class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-blue-100">
+                <option>Snapspace-East</option>
+                <option>Snapspace-Central</option>
+                <option>Snapspace-West</option>
+              </select>
+            </label>
+          </div>
+        </article>
+
+        <article class="card col-span-12">
+          <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <h2 class="text-lg font-semibold">General Info Asyn-Rep-Volume</h2>
+            <div class="flex items-center gap-3">
+              <label class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100">
+                <span>Export</span>
+                <input type="checkbox" id="exportToggle" class="peer sr-only" />
+                <span class="relative h-5 w-9 rounded-full bg-slate-300 transition peer-checked:bg-primary after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition peer-checked:after:translate-x-4"></span>
+              </label>
+              <button class="rounded-lg border border-slate-200 p-2 text-slate-500 hover:bg-slate-100" aria-label="Edit">✏️</button>
+              <button class="rounded-lg border border-slate-200 p-2 text-slate-500 hover:bg-slate-100" aria-label="Delete">🗑️</button>
+              <button class="rounded-lg border border-slate-200 p-2 text-slate-500 hover:bg-slate-100" aria-label="More options">⋯</button>
+            </div>
+          </div>
+
+          <dl class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-5">
+            <div><dt class="field-label">Active Session</dt><dd class="field-value">Session-03</dd></div>
+            <div><dt class="field-label">Volume Block Size</dt><dd class="field-value"><span class="badge bg-amber-100 text-amber-700">64 KB</span></dd></div>
+            <div><dt class="field-label">Volume Size (GiB)</dt><dd class="field-value"><span class="badge bg-blue-100 text-blue-700">1,024 GiB</span></dd></div>
+            <div><dt class="field-label">Volume Type</dt><dd class="field-value">Asynchronous Replication</dd></div>
+            <div><dt class="field-label">Encryption</dt><dd class="field-value">AES-256 Enabled</dd></div>
+            <div><dt class="field-label">Image Type</dt><dd class="field-value">Thin Provisioned</dd></div>
+            <div><dt class="field-label">Snapshot Type</dt><dd class="field-value">Crash Consistent</dd></div>
+            <div><dt class="field-label">iSCSI Target Name</dt><dd class="field-value">iqn.2026-03.com.scvm:asyn-rep-volume</dd></div>
+            <div><dt class="field-label">Snapshots Recovered</dt><dd class="field-value"><span class="badge bg-violet-100 text-violet-700">N/A</span></dd></div>
+            <div><dt class="field-label">Allowed iSCSI Host</dt><dd class="field-value">host-cluster-a-prod</dd></div>
+          </dl>
+        </article>
+
+        <article class="card col-span-12 xl:col-span-6">
+          <h3 class="mb-5 text-base font-semibold">Status of Asyn-Rep-Volume</h3>
+          <dl class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div><dt class="field-label">Storage Concentrator</dt><dd class="field-value">SC-Node-East-04</dd></div>
+            <div><dt class="field-label">Volume Block Size</dt><dd class="field-value"><span class="badge bg-amber-100 text-amber-700">64 KB</span></dd></div>
+            <div><dt class="field-label">Volume Size (GiB)</dt><dd class="field-value"><span class="badge bg-blue-100 text-blue-700">1,024 GiB</span></dd></div>
+          </dl>
+        </article>
+
+        <article class="card col-span-12 xl:col-span-6">
+          <h3 class="mb-5 text-base font-semibold">Existing Mapping</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-slate-200 text-sm">
+              <thead>
+                <tr class="text-left text-xs uppercase tracking-wide text-slate-500">
+                  <th class="pb-3 pr-4">Name</th>
+                  <th class="pb-3 pr-4">Image Type</th>
+                  <th class="pb-3 pr-4">Image Status</th>
+                  <th class="pb-3">Rebuild Percent</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-slate-50">
+                  <td class="py-3 pr-4 font-medium">map-prod-a1</td>
+                  <td class="py-3 pr-4">Primary</td>
+                  <td class="py-3 pr-4"><span class="inline-flex items-center gap-1 text-emerald-600">✔ Healthy</span></td>
+                  <td class="py-3">
+                    <div class="h-2 w-full rounded-full bg-rose-100"><div class="h-2 w-[22%] rounded-full bg-rose-500"></div></div>
+                    <span class="mt-1 block text-xs text-slate-500">22%</span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="py-3 pr-4 font-medium">map-dr-b3</td>
+                  <td class="py-3 pr-4">Replica</td>
+                  <td class="py-3 pr-4"><span class="inline-flex items-center gap-1 text-amber-600">⚠ Rebuilding</span></td>
+                  <td class="py-3">
+                    <div class="h-2 w-full rounded-full bg-rose-100"><div class="h-2 w-[68%] rounded-full bg-rose-500"></div></div>
+                    <span class="mt-1 block text-xs text-slate-500">68%</span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="py-3 pr-4 font-medium">map-archive-c2</td>
+                  <td class="py-3 pr-4">Snapshot</td>
+                  <td class="py-3 pr-4"><span class="inline-flex items-center gap-1 text-emerald-600">✔ Healthy</span></td>
+                  <td class="py-3">
+                    <div class="h-2 w-full rounded-full bg-rose-100"><div class="h-2 w-[14%] rounded-full bg-rose-500"></div></div>
+                    <span class="mt-1 block text-xs text-slate-500">14%</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const tabs = document.querySelectorAll("#tabs .tab-btn");
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((item) => item.classList.remove("active"));
+          tab.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
